@@ -1,6 +1,5 @@
 //
 //  iAPManager.h
-//  PaperWars
 //
 //  Created by Caleb Jonassaint on 12/21/12.
 //  Copyright (c) 2012 theCodeMonsters. All rights reserved.
