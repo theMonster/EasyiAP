@@ -1,5 +1,6 @@
 //
 //  iAPManager.h
+//  PaperWars
 //
 //  Created by Caleb Jonassaint on 12/21/12.
 //  Copyright (c) 2012 theCodeMonsters. All rights reserved.
@@ -17,8 +18,8 @@
 @optional
 - (void) storeIsDoneLoading;
 - (void) restoreProduct:(iAPProduct *)product;
+- (void) noProductsRestored;
 - (void) productLoaded:(iAPProduct *)product;
-- (void) canceledProduct:(iAPProduct *)product;
 - (void) productsLoaded:(NSArray *)products;
 @end
 

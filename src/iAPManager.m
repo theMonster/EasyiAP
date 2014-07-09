@@ -1,7 +1,8 @@
 //
 //  iAPManager.m
+//  PaperWars
 //
-//  Created by theMonster on 12/21/12.
+//  Created by Caleb Jonassaint on 12/21/12.
 //  Copyright (c) 2012 theCodeMonsters. All rights reserved.
 //
 
@@ -22,12 +23,15 @@
         {
             case SKPaymentTransactionStatePurchased:
                 [self completedTransaction:transaction];
+                NSLog(@"Transaction purchased");
                 break;
             case SKPaymentTransactionStateFailed:
                 [self failedTransaction:transaction];
+                NSLog(@"Transaction f    ailed: %@",transaction.error);
                 break;
             case SKPaymentTransactionStateRestored:
                 [self restoreTransaction:transaction];
+                NSLog(@"Transaction restored");
                 break;
         }
     }
@@ -64,6 +68,7 @@
     iAPProduct *easyProduct = [self.products objectForKey:product.productID];
     if (product == nil) {
         [self.delegate errorOccuredForProduct:easyProduct];
+        NSLog(@"No product");
     } else {
         @try {
             [[SKPaymentQueue defaultQueue] addPayment:[SKPayment paymentWithProduct:productSK]];
@@ -71,6 +76,7 @@
         }
         @catch (NSException *exception) {
             [self.delegate errorOccuredForProduct:easyProduct];
+            NSLog(@"Exception: %@",exception);
         }
     }
 }
@@ -79,7 +85,7 @@
 {
     NSArray *myProducts = response.products;
     NSMutableArray *myEasyProducts = [NSMutableArray array];
-    for (int i = 0; i < myProducts.count; i++)
+    for (unsigned int i = 0; i < myProducts.count; i++)
     {
         SKProduct *product = [myProducts objectAtIndex:i];
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
@@ -127,6 +133,17 @@
         [self.delegate errorForLoadDidOccur];
     }
     return self;
+}
+
+- (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
+{
+    if([queue.transactions count]>0){
+        NSLog(@"Received restored transactions: %lu", (unsigned long)queue.transactions.count);
+    }
+    else {
+        NSLog(@"No Product to restore");
+        [self.delegate noProductsRestored];
+    }
 }
 
 //

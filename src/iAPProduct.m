@@ -1,7 +1,8 @@
 //
 //  iAPProduct.m
+//  PaperWars
 //
-//  Created by theMonster on 12/22/12.
+//  Created by Caleb Jonassaint on 12/22/12.
 //  Copyright (c) 2012 theCodeMonsters. All rights reserved.
 //
 
